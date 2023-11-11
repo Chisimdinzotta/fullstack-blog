@@ -3,7 +3,7 @@ import articleType from "../models/article.model";
 const articles: articleType[] = [
     {   
         id: 1,
-        name: "Generative AI",
+        title: "Generative AI",
         content: [
             `Welcome! Today we're going to be talking about the fastest way to
             learn React. We'll be discussing some topics such as proin congue
@@ -25,12 +25,12 @@ const articles: articleType[] = [
             nisi. Nunc vel pulvinar diam. Nam eleifend egestas viverra. Donec finibus lectus 
             sed lorem ultricies, eget ornare leo luctus. Morbi vehicula, nulla eu tempor 
             interdum, nibh elit congue tellus, ac vulputate urna lorem nec nisi. Morbi id 
-            consequat quam. Vivamus accumsan dui in facilisis aliquet.`,
+            consequat quam. Vivamus accumsan dui in facilisis aliquet.`
         ]
     },
     {
         id: 2,
-        name: "Machine Learning",
+        title: "Machine Learning",
         content: [
             `Welcome! Today we're going to be talking about machine learning. We'll be discussing 
             some topics such as proin congue ligula id risus posuere, vel eleifend ex egestas. Sed in turpis leo. 
@@ -47,7 +47,7 @@ const articles: articleType[] = [
             nisi. Nunc vel pulvinar diam. Nam eleifend egestas viverra. Donec finibus lectus 
             sed lorem ultricies, eget ornare leo luctus. Morbi vehicula, nulla eu tempor 
             interdum, nibh elit congue tellus, ac vulputate urna lorem nec nisi. Morbi id 
-            consequat quam. Vivamus accumsan dui in facilisis aliquet.`,
+            consequat quam. Vivamus accumsan dui in facilisis aliquet.`
         ]
     },
 ];
