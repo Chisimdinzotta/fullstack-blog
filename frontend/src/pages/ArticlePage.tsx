@@ -5,33 +5,34 @@ import Comments from "../components/CommentsList";
 import NotFound from "./NotFoundPage";
 //import articleType from "../models/article.model";
 import articles from "../assets/article.content";
+import { CommentsType } from "../models/comments.model";
 
-interface ArticleIdType{
-    articleId:string;
+interface ArticleIdType {
+    articleId: string;
 }
 
-interface ArticleInfoType{
+interface ArticleInfoType {
     upvotes: number;
-    comment: string[];
+    comment: CommentsType[];
 }
 
-const ArticlePage: React.FC = ()=>{
+const ArticlePage: React.FC = () => {
 
-    const [articleInfo, setArticleInfo] = useState<ArticleInfoType>({upvotes:0, comment:[]});
+    const [articleInfo, setArticleInfo] = useState<ArticleInfoType>({ upvotes: 0, comment: [] });
     const [Loading, setLoading] = useState<Boolean>(true);
-    const {articleId}: ArticleIdType = useParams();
+    const { articleId }: ArticleIdType = useParams();
 
-    useEffect(()=>{
-        const loadArticleInfo = async ()=>{
+    useEffect(() => {
+        const loadArticleInfo = async () => {
             try {
                 const response = await axios.get(`/api/article/${articleId}`)
                 const newArticleInfo: ArticleInfoType = response.data
                 setArticleInfo(newArticleInfo)
             }
-            catch(error){
+            catch (error) {
                 console.log(`${error} occured while loading article`);
             }
-            finally{
+            finally {
                 setLoading(false);
             }
         }
@@ -40,29 +41,38 @@ const ArticlePage: React.FC = ()=>{
 
     const article = articles.find(article => article.title === articleId);
 
-    if (!article){
-        return(
-            <NotFound/>
+    if (!article) {
+        return (
+            <NotFound />
         )
     };
 
-    const addUpVote = async ()=>{
+    const addUpVote = async () => {
         const reponse = await axios.put(`//api/article/${articleId}/upvote`);
-        const updatedArticleInfo:ArticleInfoType = reponse.data;
+        const updatedArticleInfo: ArticleInfoType = reponse.data;
         setArticleInfo(updatedArticleInfo);
     };
 
-    return(
+    return (
         <div>
-            {/* add loading logic */}
-            <h1>{article.title}</h1>
-            <div className="">
-                <button onClick={addUpVote}>Upvote</button>
-                <p>This article is {articleInfo.upvotes} vote(s)</p>
+            {Loading ? (
+                <h1>Loading...</h1>
+            ) : (
+            <div>
+                <h1>{article.title}</h1>
+                <div className="">
+                    <button onClick={addUpVote}>Upvote</button>
+                    <p>This article is {articleInfo.upvotes} vote(s)</p>
+                </div>
+                {article.content.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                ))};
+                <Comments comments={articleInfo.comment} />           
             </div>
-            {article.content.map((paragraph, i)=>(
-                <p key={i}>{paragraph}</p>
-            ))};
-            {/* render comment list */}
+            )};
         </div>
-    )};
+        );
+
+};
+
+export default ArticlePage;
