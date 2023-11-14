@@ -1,5 +1,5 @@
 export default interface articleType{
     id: number;
-    name: string;
+    title: string;
     content: string[];
 }
