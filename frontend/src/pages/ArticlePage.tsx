@@ -6,6 +6,7 @@ import NotFound from "./NotFoundPage";
 //import articleType from "../models/article.model";
 import articles from "../assets/article.content";
 import { CommentsType } from "../models/comments.model";
+import articleType from "../models/article.model";
 
 interface ArticleIdType {
     articleId: string;
@@ -20,7 +21,8 @@ const ArticlePage: React.FC = () => {
 
     const [articleInfo, setArticleInfo] = useState<ArticleInfoType>({ upvotes: 0, comment: [] });
     const [Loading, setLoading] = useState<Boolean>(true);
-    const { articleId }: ArticleIdType = useParams();
+    const articleId = useParams()['articleId'];
+
 
     useEffect(() => {
         const loadArticleInfo = async () => {
