@@ -1,10 +1,14 @@
 import { CommentsType } from "../models/comments.model";
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from "../firebase.config";
+import { useEffect, useState } from 'react';
 
 interface CommentsProp{
     comments: CommentsType[]
 };
 
 const Comments: React.FC<CommentsProp> = ({comments})=>{
+
     return(
         <div>
             <h1>Comments:</h1>
