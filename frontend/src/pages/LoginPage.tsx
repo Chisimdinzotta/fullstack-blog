@@ -33,7 +33,7 @@ const LoginPage: React.FC = ()=>{
                 onChange={e=>setPassword(e.target.value)}
             />
             <button onClick={login}>Log In</button>
-            <p>Don't have an account?<Link to="/create-account">Create one here.</Link></p>
+            <p>Don't have an account?<Link to="/create-account"> Create one here.</Link></p>
         </div>
     );   
 };
