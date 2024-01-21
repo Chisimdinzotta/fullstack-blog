@@ -45,7 +45,7 @@ const CreateAccount: React.FC = ()=>{
                 onChange={e=>setConfirmPassword(e.target.value)}
             />
             <button onClick={createAccount}>Create Account</button>
-            <p>Already have an account?<Link to='/login'>Login here</Link></p>
+            <p>Already have an account?<Link to='/login'> Login here</Link></p>
 
         </div>
     );

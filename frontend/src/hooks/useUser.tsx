@@ -1,31 +1,20 @@
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from "../firebase.config";
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 
-const useUser = () => {
-  useEffect(() => {
-    const addUser = async () => {
-      const userCollection = collection(db, 'users');
-      const newUser = { name: 'John Doe', email: 'john@example.com' };
+const useUser = () =>{
+    const [user, setUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-      try {
-        const docRef = await addDoc(userCollection, newUser);
-        console.log('Document written with ID:', docRef.id);
-      } catch (error) {
-        console.error('Error adding document:', error);
-      }
-    };
+    useEffect(()=>{
+        const unSubscribe = onAuthStateChanged(getAuth(), user=>{
+            setUser(user);
+            setIsLoading(false);
+        });
+        
+        return unSubscribe;
+    }, [])
 
-    addUser(); // Call the asynchronous function
-  }, []); // Empty dependency array means this useEffect runs once when the component mounts
-
-  // Your component logic here
-
-  return (
-    <div>
-        <h1>HI</h1>
-    </div>
-  );
-};
+    return {user, isLoading}
+}
 
 export default useUser;
